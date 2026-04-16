@@ -1,3 +1,28 @@
+"""
+Discord bot entry point.
+
+Connects to Discord using a token loaded from a .env file and registers the
+following behavior:
+
+Events:
+  - on_ready:       Logs a confirmation message when the bot comes online.
+  - on_member_join: Sends a welcome DM to any new server member.
+  - on_message:     Responds to the '!hello' prefix with a mention greeting,
+                    then delegates to the command framework.
+
+Commands (prefix '!'):
+  - dm <msg>:   Sends the caller a DM echoing their message.
+  - reply:      Replies directly to the caller's message with a mention.
+  - poll <q>:   Posts an embed with the given question and adds thumbs-up/down
+                reactions to act as a simple poll.
+  - hello:      Greets the caller in the channel.
+  - assign:     Gives the caller the 'Gamer' role if it exists on the server.
+  - remove:     Removes the 'Gamer' role from the caller.
+  - secret:     Sends a special message exclusively to members who hold the
+                'Gamer' role (enforced by @commands.has_role).
+
+All Discord activity is written to discord.log at DEBUG level.
+"""
 import discord
 from discord.ext import commands
 import logging

@@ -1,3 +1,16 @@
+"""
+Discord webhook sender.
+
+Loads a webhook URL from a .env file (DISCORD_WEBHOOK_URL) and immediately
+POSTs a single embed message to that webhook using the Discord REST API.
+
+The embed contains a hardcoded title, description, and color (red, 0xFF0000).
+The request uses the '?wait=true' query parameter so Discord returns the
+created message object in the response body.
+
+On success (HTTP 200) the response JSON is printed; any other status code
+prints a 'No content returned' notice instead.
+"""
 import requests
 import os
 from dotenv import load_dotenv

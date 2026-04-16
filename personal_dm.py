@@ -1,3 +1,18 @@
+"""
+Direct Discord DM sender using a user token.
+
+Loads DISCORD_USER_TOKEN and FRIEND_ID from a .env file located in the same
+directory as this script, then sends a hardcoded DM to the target user via
+two sequential Discord REST API (v10) calls:
+
+  1. POST /users/@me/channels — opens (or retrieves) the DM channel between
+     the authenticated user and FRIEND_ID, returning the channel ID.
+  2. POST /channels/{channel_id}/messages — sends the message
+     "This is a test from my python script!" into that DM channel.
+
+Unlike the bot scripts, this authenticates as a regular Discord user account
+(DISCORD_USER_TOKEN) rather than a bot token.
+"""
 import requests
 import os
 from dotenv import load_dotenv
